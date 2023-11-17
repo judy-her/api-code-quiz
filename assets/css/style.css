@@ -1,6 +1,10 @@
 * {
 }
 
+:root {
+  --main-font: 'Philosopher', sans-serif;
+  --question-font: 'Poiret One', sans-serif;
+}
 body {
   background-image: linear-gradient(to right, purple, pink);
 }
@@ -8,13 +12,22 @@ h1,
 p {
   text-align: center;
 }
-
-p {
-  font-size: 25px;
+h1 {
+  font-family: var(--main-font);
+  font-size: 40px;
 }
 
+p {
+  font-size: 30px;
+  font-family: var(--question-font);
+  font-weight: bold;
+}
+.viewHighScores {
+  font-family: 'Philosopher', sans-serif;
+}
 .time {
   text-align: center;
+  font-family: var(--main-font);
 }
 
 .card {
@@ -30,6 +43,7 @@ button {
   border-radius: 20px;
   align-self: center;
   font-size: 15px;
+  font-family: var(--main-font);
 }
 button:hover {
   background-color: blueviolet;
