@@ -4,3 +4,20 @@
 body {
   background-image: linear-gradient(to right, purple, pink);
 }
+h1,
+p {
+  text-align: center;
+}
+
+p {
+  font-size: 25px;
+}
+.time {
+  text-align: center;
+}
+
+.card {
+  background-color: purple;
+  display: flex;
+  flex-direction: column;
+}
