@@ -12,6 +12,7 @@ p {
 p {
   font-size: 25px;
 }
+
 .time {
   text-align: center;
 }
@@ -20,4 +21,16 @@ p {
   background-color: purple;
   display: flex;
   flex-direction: column;
+}
+
+/* Start Quiz button -----------------*/
+button {
+  width: 90px;
+  height: 40px;
+  border-radius: 20px;
+  align-self: center;
+  font-size: 15px;
+}
+button:hover {
+  background-color: blueviolet;
 }
