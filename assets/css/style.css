@@ -2,6 +2,10 @@
   --main-font: 'Philosopher', sans-serif;
   --question-font: 'Poiret One', sans-serif;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
   background-image: linear-gradient(to right, purple, pink);
 }
@@ -12,12 +16,14 @@ p {
 h1 {
   font-family: var(--main-font);
   font-size: 40px;
+  padding-bottom: 10px;
 }
 
 p {
   font-size: 30px;
   font-family: var(--question-font);
   font-weight: bold;
+  line-height: 1.4;
 }
 .viewHighScores {
   font-family: 'Philosopher', sans-serif;
@@ -41,7 +47,18 @@ button {
   align-self: center;
   font-size: 15px;
   font-family: var(--main-font);
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 button:hover {
   background-color: blueviolet;
+}
+/* btn container for buttons */
+#btnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+.answer {
+  margin-top: 0px;
 }

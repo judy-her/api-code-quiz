@@ -3,7 +3,7 @@ var timeLeft = document.querySelector('#time-left');
 var startBtn = document.querySelector('.startbtn');
 var titleText = document.querySelector('.title');
 var titleQuestion = document.querySelector('.title-question');
-var question1 = document.querySelector('.question');
+var btnContainer = document.getElementById('btnContainer');
 
 //SECTION setInterval-------------------------------------
 var secondsLeft = 20;
@@ -17,17 +17,35 @@ function setTime() {
   }
 }
 setTime();
+//SECTION function for question 1------------------
+var question1 = function () {
+  titleText.textContent =
+    'Which tag do you use in your HTML link your JavaScript? ';
+  btnContainer.innerHTML = `
+  <button class="answer one">link</button>
+  <button class="answer two">body</button>
+  <button class="answer three">script</button>
+  <button class="answer four">div</button>
+  `;
+
+  var correctAnswerBtn = btnContainer.querySelector('.three');
+  btnContainer.addEventListener('click', function (event) {
+    var clickedBtn = event.target;
+
+    if (clickedBtn === correctAnswerBtn) {
+      alert('Correct!');
+    } else {
+      alert('Try again');
+    }
+  });
+};
 
 //SECTION add event listener to start quiz-------------------
 startBtn.addEventListener('click', function (event) {
   event.preventDefault();
-  //run first question here
-  titleText.textContent = '';
-  titleQuestion.textContent = '';
   //hide start button on click
   startBtn.style.display = 'none';
+  titleText.textContent = '';
+  titleQuestion.textContent = '';
+  question1();
 });
-//SECTION make function for start button
-var question1 = function () {
-  titleText.textContent = question1;
-};
