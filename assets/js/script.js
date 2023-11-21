@@ -4,6 +4,7 @@ var startBtn = document.querySelector('.startbtn');
 var titleText = document.querySelector('.title');
 var titleQuestion = document.querySelector('.title-question');
 var btnContainer = document.getElementById('btnContainer');
+var correctWrongAlert = document.getElementById('correct-wrong');
 
 //SECTION setInterval-------------------------------------
 var secondsLeft = 20;
@@ -32,9 +33,9 @@ var question1 = function () {
     var clickedBtn = event.target;
 
     if (clickedBtn === correctAnswerBtn) {
-      alert('Correct!');
+      correctWrongAlert.textContent = 'Correct!';
     } else {
-      alert('Try again');
+      correctWrongAlert.textContent = 'Wrong!';
     }
   });
 };
@@ -53,8 +54,8 @@ function startQuiz() {
   //call question1 here
   question1();
 }
-//SECTION add event listener to start quiz-------------------
 
+//SECTION add event listener to start quiz-------------------
 startBtn.addEventListener('click', function (event) {
   event.preventDefault();
   startQuiz();
