@@ -7,7 +7,6 @@ var btnContainer = document.getElementById('btnContainer');
 
 //SECTION setInterval-------------------------------------
 var secondsLeft = 20;
-var myInterval = setInterval(setTime, 1000);
 
 function setTime() {
   secondsLeft--;
@@ -39,13 +38,24 @@ var question1 = function () {
     }
   });
 };
+//SECTION NOTE WORK ON question 2 function, think about it
 
-//SECTION add event listener to start quiz-------------------
-startBtn.addEventListener('click', function (event) {
-  event.preventDefault();
+//SECTION start Quiz function
+function startQuiz() {
   //hide start button on click
   startBtn.style.display = 'none';
   titleText.textContent = '';
   titleQuestion.textContent = '';
+  //start timer here
+  var myInterval = setInterval(setTime, 1000);
+  //show timer
+  setTime();
+  //call question1 here
   question1();
+}
+//SECTION add event listener to start quiz-------------------
+
+startBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  startQuiz();
 });
