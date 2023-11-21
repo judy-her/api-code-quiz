@@ -34,8 +34,10 @@ var question1 = function () {
 
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
+      secondsLeft += 5;
     } else {
       correctWrongAlert.textContent = 'Wrong!';
+      secondsLeft -= 5;
     }
   });
 };
