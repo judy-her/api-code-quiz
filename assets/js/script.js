@@ -8,6 +8,7 @@ var correctWrongAlert = document.getElementById('correct-wrong');
 
 //SECTION setInterval-------------------------------------
 var secondsLeft = 20;
+var myInterval;
 
 function setTime() {
   secondsLeft--;
@@ -16,7 +17,27 @@ function setTime() {
     clearInterval(myInterval);
   }
 }
-setTime();
+
+//SECTION start Quiz function
+function startQuiz() {
+  //hide start button on click
+  startBtn.style.display = 'none';
+  titleText.textContent = '';
+  titleQuestion.textContent = '';
+  //start timer here
+  myInterval = setInterval(setTime, 1000);
+  //show timer
+  setTime();
+  //call question1 here
+  question1();
+}
+
+//SECTION add event listener to start quiz-------------------
+startBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  startQuiz();
+});
+
 //SECTION function for question 1------------------
 var question1 = function () {
   titleText.textContent =
@@ -42,23 +63,3 @@ var question1 = function () {
   });
 };
 //SECTION NOTE WORK ON question 2 function, think about it
-
-//SECTION start Quiz function
-function startQuiz() {
-  //hide start button on click
-  startBtn.style.display = 'none';
-  titleText.textContent = '';
-  titleQuestion.textContent = '';
-  //start timer here
-  var myInterval = setInterval(setTime, 1000);
-  //show timer
-  setTime();
-  //call question1 here
-  question1();
-}
-
-//SECTION add event listener to start quiz-------------------
-startBtn.addEventListener('click', function (event) {
-  event.preventDefault();
-  startQuiz();
-});
