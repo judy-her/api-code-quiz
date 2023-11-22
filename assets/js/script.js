@@ -46,6 +46,9 @@ startBtn.addEventListener('click', function (event) {
 });
 
 //SECTION function for question 1------------------
+var correctAnswerBtn;
+var currentQuestion = 1;
+
 var question1 = function () {
   titleText.textContent =
     'Which tag do you use in your HTML link your JavaScript? ';
@@ -56,30 +59,36 @@ var question1 = function () {
   <button class="answer four">div</button>
   `;
 
-  var correctAnswerBtn = btnContainer.querySelector('.three');
+  correctAnswerBtn = btnContainer.querySelector('.three');
   btnContainer.addEventListener('click', function (event) {
     var clickedBtn = event.target;
 
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      count = count + 3;
+      count += 3;
       scoreCount(); //updates score count
-      question2();
+      //xpert ai helped with this
+      currentQuestion++;
+      if (currentQuestion === 2) {
+        question2();
+      } else if (currentQuestion === 3) {
+        question3();
+      }
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      question2();
+      currentQuestion++;
+      if (currentQuestion === 2) {
+        question2();
+      } else if (currentQuestion === 3) {
+        question3();
+      }
     }
   });
 };
 
-// function hideQuestionAndAnswers() {
-//   // titleText.textContent = '';
-//   // titleQuestion.textContent = '';
-//   correctWrongAlert.textContent = '';
-// }
-//SECTION NOTE WORK ON question 2 function, think about it
+//SECTION Question 2---------------------
 var question2 = function () {
   titleText.textContent = 'I can declare a variable using: ';
   btnContainer.innerHTML = `
@@ -90,4 +99,51 @@ var question2 = function () {
   `;
 
   correctAnswerBtn = btnContainer.querySelector('.four');
+  btnContainer.addEventListener('click', function (event) {
+    var clickedBtn = event.target;
+
+    if (clickedBtn === correctAnswerBtn) {
+      correctWrongAlert.textContent = 'Correct!';
+      secondsLeft += 5;
+      count += 3;
+      scoreCount(); //updates score count
+      currentQuestion++;
+      if (currentQuestion === 3) {
+        question3();
+      }
+    } else {
+      correctWrongAlert.textContent = 'Wrong!';
+      secondsLeft -= 5;
+      currentQuestion++;
+      if (currentQuestion === 3) {
+        question3();
+      }
+    }
+  });
 };
+//SECTION Question 3---------------------
+var question3 = function () {
+  titleText.textContent = 'Strict equality checks for: ';
+  btnContainer.innerHTML = `
+  <button class="answer one">Value</button>
+  <button class="answer two">Value and Type</button>
+  <button class="answer three">Type</button>
+  <button class="answer four">none of the above</button>
+  `;
+
+  correctAnswerBtn = btnContainer.querySelector('.two');
+  btnContainer.addEventListener('click', function (event) {
+    var clickedBtn = event.target;
+
+    if (clickedBtn === correctAnswerBtn) {
+      correctWrongAlert.textContent = 'Correct!';
+      secondsLeft += 5;
+      count += 3;
+      scoreCount(); //updates score count
+    } else {
+      correctWrongAlert.textContent = 'Wrong!';
+      secondsLeft -= 5;
+    }
+  });
+};
+question1();
