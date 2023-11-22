@@ -27,6 +27,7 @@ p {
 }
 
 .viewHighScores,
+.score,
 #correct-wrong {
   font-family: 'Philosopher', sans-serif;
 }

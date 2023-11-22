@@ -5,6 +5,13 @@ var titleText = document.querySelector('.title');
 var titleQuestion = document.querySelector('.title-question');
 var btnContainer = document.getElementById('btnContainer');
 var correctWrongAlert = document.getElementById('correct-wrong');
+var count = 0;
+var countEl = document.querySelector('#score-count');
+
+//SECTION create a function to keep track of score
+function scoreCount() {
+  countEl.textContent = count;
+}
 
 //SECTION setInterval-------------------------------------
 var secondsLeft = 20;
@@ -30,6 +37,8 @@ function startQuiz() {
   setTime();
   //call question1 here
   question1();
+  //start score count here
+  // scoreCount();
 }
 
 //SECTION add event listener to start quiz-------------------
@@ -56,6 +65,8 @@ var question1 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
+      count = count + 3;
+      scoreCount(); //updates score count
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
