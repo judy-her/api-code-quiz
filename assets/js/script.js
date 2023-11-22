@@ -37,8 +37,6 @@ function startQuiz() {
   setTime();
   //call question1 here
   question1();
-  //start score count here
-  // scoreCount();
 }
 
 //SECTION add event listener to start quiz-------------------
@@ -67,10 +65,29 @@ var question1 = function () {
       secondsLeft += 5;
       count = count + 3;
       scoreCount(); //updates score count
+      question2();
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      question2();
     }
   });
 };
+
+// function hideQuestionAndAnswers() {
+//   // titleText.textContent = '';
+//   // titleQuestion.textContent = '';
+//   correctWrongAlert.textContent = '';
+// }
 //SECTION NOTE WORK ON question 2 function, think about it
+var question2 = function () {
+  titleText.textContent = 'I can declare a variable using: ';
+  btnContainer.innerHTML = `
+  <button class="answer one">var</button>
+  <button class="answer two">let</button>
+  <button class="answer three">const</button>
+  <button class="answer four">all of the above</button>
+  `;
+
+  correctAnswerBtn = btnContainer.querySelector('.four');
+};
