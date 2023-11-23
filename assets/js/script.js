@@ -190,11 +190,11 @@ var question3 = function () {
   <button class="answer one">Value</button>
   <button class="answer two">Value and Type</button>
   <button class="answer three">Type</button>
-  <button class="answer four">none of the above</button>
+  <button class="answer four">None of the above</button>
   `;
 
   correctAnswerBtn = btnContainer.querySelector('.two');
-  btnContainer.addEventListener('click', function (event) {
+  btnContainer.addEventListener('click', function question3ClickHandler(event) {
     var clickedBtn = event.target;
 
     if (clickedBtn === correctAnswerBtn) {
@@ -202,9 +202,61 @@ var question3 = function () {
       secondsLeft += 5;
       count += 3;
       scoreCount(); //updates score count
+      currentQuestion++;
+
+      setTimeout(function () {
+        if (currentQuestion === 4) {
+          question4();
+        }
+      }, 1000);
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      currentQuestion++;
+      setTimeout(function () {
+        if (currentQuestion === 4) {
+          question4();
+        }
+      }, 1000);
+    }
+  });
+};
+//SECTION Question 4---------------------
+var question4 = function () {
+  clearCorrectWrongMessage();
+  titleText.textContent = 'Strict equality checks for: ';
+  btnContainer.innerHTML = `
+  <button class="answer one">Value</button>
+  <button class="answer two">Value and Type</button>
+  <button class="answer three">Type</button>
+  <button class="answer four">None of the above</button>
+  `;
+
+  correctAnswerBtn = btnContainer.querySelector('.two');
+  btnContainer.addEventListener('click', function question4ClickHandler(event) {
+    var clickedBtn = event.target;
+
+    if (clickedBtn === correctAnswerBtn) {
+      correctWrongAlert.textContent = 'Correct!';
+      secondsLeft += 5;
+      count += 3;
+      scoreCount(); //updates score count
+      currentQuestion++;
+
+      setTimeout(function () {
+        if (currentQuestion === 4) {
+          question4();
+        }
+      }, 1000);
+    } else {
+      correctWrongAlert.textContent = 'Wrong!';
+      secondsLeft -= 5;
+      currentQuestion++;
+      setTimeout(function () {
+        if (currentQuestion === 4) {
+          question4();
+        }
+      }, 1000);
     }
   });
 };
