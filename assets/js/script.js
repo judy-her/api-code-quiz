@@ -224,12 +224,12 @@ var question3 = function () {
 //SECTION Question 4---------------------
 var question4 = function () {
   clearCorrectWrongMessage();
-  titleText.textContent = 'Strict equality checks for: ';
+  titleText.textContent = 'What does the JSON.stringify() method do? ';
   btnContainer.innerHTML = `
-  <button class="answer one">Value</button>
-  <button class="answer two">Value and Type</button>
-  <button class="answer three">Type</button>
-  <button class="answer four">None of the above</button>
+  <button class="To parse a JSON string">Value</button>
+  <button class="To convert a JS object to a JSON string">Value and Type</button>
+  <button class="answer three">To make a string more readable</button>
+  <button class="answer four">To make a JSON string to a JS object</button>
   `;
 
   correctAnswerBtn = btnContainer.querySelector('.two');
