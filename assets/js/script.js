@@ -86,6 +86,9 @@ var question1 = function () {
           question3();
         } else if (currentQuestion === 4) {
           question4();
+        } else if (currentQuestion === 5) {
+          question5();
+        } else {
         }
       }, 1000); // Add a short delay before adding the next question's event listener
     } else {
@@ -100,51 +103,13 @@ var question1 = function () {
           question3();
         } else if (currentQuestion === 4) {
           question4();
+        } else if (currentQuestion === 5) {
+          question5();
         }
       }, 1000); // Add a short delay before adding the next question's event listener
     }
   });
 };
-
-//NOTE MY ORIGINAL QUESTION 1 FUNCTION
-// var question1 = function () {
-//   titleText.textContent =
-//     'Which tag do you use in your HTML link your JavaScript? ';
-//   btnContainer.innerHTML = `
-//   <button class="answer one">link</button>
-//   <button class="answer two">body</button>
-//   <button class="answer three">script</button>
-//   <button class="answer four">div</button>
-//   `;
-
-//   correctAnswerBtn = btnContainer.querySelector('.three');
-//   btnContainer.addEventListener('click', function (event) {
-//     var clickedBtn = event.target;
-
-//     if (clickedBtn === correctAnswerBtn) {
-//       correctWrongAlert.textContent = 'Correct!';
-//       secondsLeft += 5;
-//       count += 3;
-//       scoreCount(); //updates score count
-//       //xpert ai helped with this
-//       currentQuestion++;
-//       if (currentQuestion === 2) {
-//         question2();
-//       } else if (currentQuestion === 3) {
-//         question3();
-//       }
-//     } else {
-//       correctWrongAlert.textContent = 'Wrong!';
-//       secondsLeft -= 5;
-//       currentQuestion++;
-//       if (currentQuestion === 2) {
-//         question2();
-//       } else if (currentQuestion === 3) {
-//         question3();
-//       }
-//     }
-//   });
-// };
 
 //SECTION Question 2---------------------
 var question2 = function () {
@@ -159,8 +124,8 @@ var question2 = function () {
 
   correctAnswerBtn = btnContainer.querySelector('.four');
 
-  btnContainer.addEventListener('click', function question2ClickHandler(event) {
-    var clickedBtn = event.target;
+  function question2ClickHandler(event) {
+    clickedBtn = event.target;
 
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
@@ -183,11 +148,15 @@ var question2 = function () {
           question3();
         }
       }, 1000);
+      btnContainer.removeEventListener('click', question2ClickHandler); // Remove event listener for question 2
+      btnContainer.addEventListener('click', question3ClickHandler); // Add event listener for question 3
     }
-  });
+  }
+  btnContainer.addEventListener('click', question2ClickHandler);
 };
 //SECTION Question 3---------------------
 var question3 = function () {
+  btnContainer.removeEventListener('click', question2ClickHandler); // Remove event listener for question 2
   clearCorrectWrongMessage();
   titleText.textContent = '3) Strict equality checks for: ';
   btnContainer.innerHTML = `
@@ -230,13 +199,13 @@ var question4 = function () {
   clearCorrectWrongMessage();
   titleText.textContent = '4) What does the JSON.stringify() method do? ';
   btnContainer.innerHTML = `
-  <button class="answer one">Parses a JSON string</button>
-  <button class="answer two">Converts a JS object to a JSON string</button>
-  <button class="answer three">Makes a string more readable</button>
-  <button class="answer four">Makes a JSON string to a JS object</button>
+  <button class="answer one json-btn">Parse JSON string</button>
+  <button class="answer b json-btn">Convert a JS object to a JSON string</button>
+  <button class="answer three json-btn">Makes string more readable</button>
+  <button class="answer four json-btn">Convert a JSON string to a JS object</button>
  `;
 
-  correctAnswerBtn = btnContainer.querySelector('.two');
+  correctAnswerBtn = btnContainer.querySelector('.b');
   btnContainer.addEventListener('click', function question4ClickHandler(event) {
     var clickedBtn = event.target;
 
@@ -244,7 +213,7 @@ var question4 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       count += 3;
-      scoreCount(); //updates score count
+      scoreCount();
       currentQuestion++;
 
       setTimeout(function () {
@@ -290,10 +259,15 @@ var question5 = function () {
       secondsLeft -= 5;
 
       setTimeout(function () {
-        if (currentQuestion === 5) {
-          question5();
-        }
+        endQuiz();
       }, 1000);
     }
   });
 };
+
+function endQuiz() {
+  clearCorrectWrongMessage();
+  //display final score and add initials
+  //1)
+  titleText.textContent = 'Quiz Complete!';
+}

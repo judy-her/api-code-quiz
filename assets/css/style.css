@@ -69,3 +69,8 @@ button:hover {
 .answer {
   margin-top: 0px;
 }
+
+.json-btn {
+  height: 55px;
+  width: 110px;
+}
