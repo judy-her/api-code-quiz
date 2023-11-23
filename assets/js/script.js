@@ -58,7 +58,7 @@ var question1 = function () {
   clearCorrectWrongMessage();
 
   titleText.textContent =
-    'Which tag do you use in your HTML link your JavaScript? ';
+    '1) Which tag do you use in your HTML link your JavaScript? ';
   btnContainer.innerHTML = `
     <button class="answer one">link</button>
     <button class="answer two">body</button>
@@ -84,6 +84,8 @@ var question1 = function () {
           question2();
         } else if (currentQuestion === 3) {
           question3();
+        } else if (currentQuestion === 4) {
+          question4();
         }
       }, 1000); // Add a short delay before adding the next question's event listener
     } else {
@@ -96,6 +98,8 @@ var question1 = function () {
           question2();
         } else if (currentQuestion === 3) {
           question3();
+        } else if (currentQuestion === 4) {
+          question4();
         }
       }, 1000); // Add a short delay before adding the next question's event listener
     }
@@ -145,7 +149,7 @@ var question1 = function () {
 //SECTION Question 2---------------------
 var question2 = function () {
   clearCorrectWrongMessage();
-  titleText.textContent = 'I can declare a variable using: ';
+  titleText.textContent = '2) I can declare a variable using: ';
   btnContainer.innerHTML = `
   <button class="answer one">var</button>
   <button class="answer two">let</button>
@@ -185,7 +189,7 @@ var question2 = function () {
 //SECTION Question 3---------------------
 var question3 = function () {
   clearCorrectWrongMessage();
-  titleText.textContent = 'Strict equality checks for: ';
+  titleText.textContent = '3) Strict equality checks for: ';
   btnContainer.innerHTML = `
   <button class="answer one">Value</button>
   <button class="answer two">Value and Type</button>
@@ -224,13 +228,13 @@ var question3 = function () {
 //SECTION Question 4---------------------
 var question4 = function () {
   clearCorrectWrongMessage();
-  titleText.textContent = 'What does the JSON.stringify() method do? ';
+  titleText.textContent = '4) What does the JSON.stringify() method do? ';
   btnContainer.innerHTML = `
-  <button class="To parse a JSON string">Value</button>
-  <button class="To convert a JS object to a JSON string">Value and Type</button>
-  <button class="answer three">To make a string more readable</button>
-  <button class="answer four">To make a JSON string to a JS object</button>
-  `;
+  <button class="answer one">Parses a JSON string</button>
+  <button class="answer two">Converts a JS object to a JSON string</button>
+  <button class="answer three">Makes a string more readable</button>
+  <button class="answer four">Makes a JSON string to a JS object</button>
+ `;
 
   correctAnswerBtn = btnContainer.querySelector('.two');
   btnContainer.addEventListener('click', function question4ClickHandler(event) {
@@ -244,17 +248,50 @@ var question4 = function () {
       currentQuestion++;
 
       setTimeout(function () {
-        if (currentQuestion === 4) {
-          question4();
+        if (currentQuestion === 5) {
+          question5();
         }
       }, 1000);
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
       currentQuestion++;
+
       setTimeout(function () {
-        if (currentQuestion === 4) {
-          question4();
+        if (currentQuestion === 5) {
+          question5();
+        }
+      }, 1000);
+    }
+  });
+};
+//SECTION Question 5---------------------
+var question5 = function () {
+  clearCorrectWrongMessage();
+  titleText.textContent = '5) What does DOM stand for? ';
+  btnContainer.innerHTML = `
+  <button class="answer one">Document Object Model</button>
+  <button class="answer two">Data On Modal</button>
+  <button class="answer three">Design Oriented Model</button>
+  <button class="answer four">Design Object Model</button>
+ `;
+
+  correctAnswerBtn = btnContainer.querySelector('.one');
+  btnContainer.addEventListener('click', function question5ClickHandler(event) {
+    var clickedBtn = event.target;
+
+    if (clickedBtn === correctAnswerBtn) {
+      correctWrongAlert.textContent = 'Correct!';
+      secondsLeft += 5;
+      count += 3;
+      scoreCount(); //updates score count
+    } else {
+      correctWrongAlert.textContent = 'Wrong!';
+      secondsLeft -= 5;
+
+      setTimeout(function () {
+        if (currentQuestion === 5) {
+          question5();
         }
       }, 1000);
     }
