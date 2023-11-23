@@ -154,7 +154,8 @@ var question2 = function () {
   `;
 
   correctAnswerBtn = btnContainer.querySelector('.four');
-  btnContainer.addEventListener('click', function (event) {
+
+  btnContainer.addEventListener('click', function question2ClickHandler(event) {
     var clickedBtn = event.target;
 
     if (clickedBtn === correctAnswerBtn) {
@@ -163,16 +164,21 @@ var question2 = function () {
       count += 3;
       scoreCount(); //updates score count
       currentQuestion++;
-      if (currentQuestion === 3) {
-        question3();
-      }
+
+      setTimeout(function () {
+        if (currentQuestion === 3) {
+          question3();
+        }
+      }, 1000);
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
       currentQuestion++;
-      if (currentQuestion === 3) {
-        question3();
-      }
+      setTimeout(function () {
+        if (currentQuestion === 3) {
+          question3();
+        }
+      }, 1000);
     }
   });
 };
