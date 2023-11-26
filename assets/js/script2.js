@@ -1,4 +1,4 @@
-console.log('i am script 2 :)');
+console.log('i am script 2 yeah:)');
 var timeLeft = document.querySelector('#time-left');
 var startBtn = document.querySelector('.startbtn');
 var titleText = document.querySelector('.title');
@@ -9,9 +9,17 @@ var count = 0;
 var countEl = document.querySelector('#score-count');
 
 //SECTION create a function to keep track of score
+var scoringInProgress = false; //chatgpt helped create this flag
 function scoreCount() {
-  //   count += 3;
-  countEl.textContent = count;
+  if (!scoringInProgress) {
+    scoringInProgress = true;
+    count = count + 3;
+    countEl.textContent = count;
+  }
+
+  setTimeout(function () {
+    scoringInProgress = false; // Reset the flag after the timeout
+  }, 1000); // Use the same timeout duration as in your code
 }
 
 //SECTION setInterval-------------------------------------
@@ -79,7 +87,8 @@ function clearCorrectWrongMessage() {
 var question1 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  console.log('this is question1 and should say 2 ' + currentQuestion);
+
+  //   console.log('this is question1 and should say 2 ' + currentQuestion);
   titleText.textContent =
     '1) Which tag do you use in your HTML link your JavaScript? ';
   btnContainer.innerHTML = `
@@ -97,7 +106,7 @@ var question1 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      count += 3;
+      //   count += 3;
       scoreCount(); // updates score count
       // xpert ai helped with this
 
@@ -125,7 +134,7 @@ var question1 = function () {
 var question2 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  console.log('this is question2 and should say 3 ' + currentQuestion);
+  //   console.log('this is question2 and should say 3 ' + currentQuestion);
 
   titleText.textContent = '2) I can declare a variable using: ';
   btnContainer.innerHTML = `
@@ -143,8 +152,8 @@ var question2 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      count += 3;
-      //   scoreCount(); //updates score count
+      //   count += 3;
+      scoreCount(); //updates score count
 
       //   currentQuestion++;
 
@@ -170,7 +179,7 @@ var question2 = function () {
 var question3 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  console.log('this is question3 and should say 4 ' + currentQuestion);
+  //   console.log('this is question3 and should say 4 ' + currentQuestion);
   titleText.textContent = '3) Strict equality checks for: ';
   btnContainer.innerHTML = `
   <button class="answer one">Value</button>
@@ -187,8 +196,8 @@ var question3 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      count += 3;
-      //   scoreCount(); //updates score count
+      //   count += 3;
+      scoreCount(); //updates score count
       //   currentQuestion++;
 
       setTimeout(function () {
@@ -214,7 +223,7 @@ var question3 = function () {
 var question4 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  console.log('this is question4 and should say 5 ' + currentQuestion);
+  //   console.log('this is question4 and should say 5 ' + currentQuestion);
   titleText.textContent = '4) What does the JSON.stringify() method do? ';
   btnContainer.innerHTML = `
     <button class="answer one json-btn">Parse JSON string</button>
@@ -230,8 +239,8 @@ var question4 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      count += 3;
-      //   scoreCount();
+      //   count += 3;
+      scoreCount();
 
       setTimeout(function () {
         if (currentQuestion === 5) {
@@ -268,8 +277,8 @@ var question5 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      count += 3;
-      // scoreCount(); //updates score count
+      //   count += 3;
+      scoreCount(); //updates score count
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;

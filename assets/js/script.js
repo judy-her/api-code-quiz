@@ -10,6 +10,7 @@ var countEl = document.querySelector('#score-count');
 
 //SECTION create a function to keep track of score
 function scoreCount() {
+  count += 3;
   countEl.textContent = count;
 }
 
@@ -26,6 +27,8 @@ function setTime() {
 }
 
 //SECTION start Quiz function----------------------
+var correctAnswerBtn;
+var currentQuestion = 1;
 function startQuiz() {
   //hide start button on click
   startBtn.style.display = 'none';
@@ -35,8 +38,17 @@ function startQuiz() {
   myInterval = setInterval(setTime, 1000);
   //show timer
   setTime();
-  //call question1 here
-  question1();
+  if (currentQuestion === 1) {
+    question1();
+  } else if (currentQuestion === 2) {
+    question2();
+  } else if (currentQuestion === 3) {
+    question3();
+  } else if (currentQuestion === 4) {
+    question4();
+  } else if (currentQuestion === 5) {
+    question5();
+  }
 }
 
 //SECTION add event listener to start quiz-------------------
@@ -51,11 +63,11 @@ function clearCorrectWrongMessage() {
 
 //SECTION function for question 1------------------
 //NOTE Xpert learning ai helped with current question variable to keep track of current question
-var correctAnswerBtn;
-var currentQuestion = 1;
+// var correctAnswerBtn;
 
 var question1 = function () {
   clearCorrectWrongMessage();
+  currentQuestion++;
 
   titleText.textContent =
     '1) Which tag do you use in your HTML link your JavaScript? ';
@@ -77,34 +89,32 @@ var question1 = function () {
       count += 3;
       scoreCount(); // updates score count
       // xpert ai helped with this
-      currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 2) {
           question2();
-        } else if (currentQuestion === 3) {
-          question3();
-        } else if (currentQuestion === 4) {
-          question4();
-        } else if (currentQuestion === 5) {
-          question5();
+          // } else if (currentQuestion === 3) {
+          //   question3();
+          // } else if (currentQuestion === 4) {
+          //   question4();
+          // } else if (currentQuestion === 5) {
+          //   question5();
         } else {
         }
       }, 1000); // Add a short delay before adding the next question's event listener
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 2) {
           question2();
-        } else if (currentQuestion === 3) {
-          question3();
-        } else if (currentQuestion === 4) {
-          question4();
-        } else if (currentQuestion === 5) {
-          question5();
+          // } else if (currentQuestion === 3) {
+          //   question3();
+          // } else if (currentQuestion === 4) {
+          //   question4();
+          // } else if (currentQuestion === 5) {
+          //   question5();
         }
       }, 1000); // Add a short delay before adding the next question's event listener
     }
@@ -114,6 +124,7 @@ var question1 = function () {
 //SECTION Question 2---------------------
 var question2 = function () {
   clearCorrectWrongMessage();
+  currentQuestion++;
   titleText.textContent = '2) I can declare a variable using: ';
   btnContainer.innerHTML = `
   <button class="answer one">var</button>
@@ -132,7 +143,6 @@ var question2 = function () {
       secondsLeft += 5;
       count += 3;
       scoreCount(); //updates score count
-      currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 3) {
@@ -142,65 +152,24 @@ var question2 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      currentQuestion++;
+
       setTimeout(function () {
         if (currentQuestion === 3) {
           question3();
         }
       }, 1000);
-      btnContainer.removeEventListener('click', question2ClickHandler); // Remove event listener for question 2
-      btnContainer.addEventListener('click', question3ClickHandler); // Add event listener for question 3
+      // btnContainer.removeEventListener('click', question2ClickHandler); // Remove event listener for question 2
+      // btnContainer.addEventListener('click', question3ClickHandler); // Add event listener for question 3
     }
   }
-  btnContainer.addEventListener('click', question2ClickHandler);
-  console.log('this should be #2: ' + currentQuestion);
+  // btnContainer.addEventListener('click', question2ClickHandler);
+  // console.log('this should be #2: ' + currentQuestion);
 };
-// //SECTION Question 3---------------------
-// var question3 = function () {
-//   clearCorrectWrongMessage();
-//   titleText.textContent = '3) Strict equality checks for: ';
-//   btnContainer.innerHTML = `
-//   <button class="answer one">Value</button>
-//   <button class="answer two">Value and Type</button>
-//   <button class="answer three">Type</button>
-//   <button class="answer four">None of the above</button>
-//   `;
 
-//   correctAnswerBtn = btnContainer.querySelector('.two');
-
-//   function question3ClickHandler(event) {
-//     clickedBtn = event.target;
-
-//     if (clickedBtn === correctAnswerBtn) {
-//       correctWrongAlert.textContent = 'Correct!';
-//       secondsLeft += 5;
-//       count += 3;
-//       scoreCount(); //updates score count
-//       currentQuestion++;
-
-//       setTimeout(function () {
-//         if (currentQuestion === 4) {
-//           question4();
-//         }
-//       }, 1000);
-//     } else {
-//       correctWrongAlert.textContent = 'Wrong!';
-//       secondsLeft -= 5;
-//       currentQuestion++;
-//       setTimeout(function () {
-//         if (currentQuestion === 4) {
-//           question4();
-//         }
-//       }, 1000);
-//       btnContainer.removeEventListener('click', question3ClickHandler); // Remove event listener for question 3
-//       btnContainer.addEventListener('click', question4ClickHandler); // Add event listener for question 4
-//     }
-//   }
-//   btnContainer.addEventListener('click', question3ClickHandler);
-// };
-//SECTION Question 3-redo---------------------
+//SECTION Question 3----------------------
 var question3 = function () {
   clearCorrectWrongMessage();
+  currentQuestion++;
   titleText.textContent = '3) Strict equality checks for: ';
   btnContainer.innerHTML = `
   <button class="answer one">Value</button>
@@ -218,17 +187,15 @@ var question3 = function () {
       secondsLeft += 5;
       count += 3;
       scoreCount();
-      currentQuestion++;
 
       setTimeout(function () {
-        if (currentQuestion === 5) {
-          question5();
+        if (currentQuestion === 4) {
+          question4();
         }
       }, 1000);
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -237,12 +204,12 @@ var question3 = function () {
       }, 1000);
     }
   });
-  console.log('this should be #3: ' + currentQuestion);
 };
 
 //SECTION Question 4---------------------
 var question4 = function () {
   clearCorrectWrongMessage();
+  currentQuestion++;
   titleText.textContent = '4) What does the JSON.stringify() method do? ';
   btnContainer.innerHTML = `
   <button class="answer one json-btn">Parse JSON string</button>
@@ -260,7 +227,6 @@ var question4 = function () {
       secondsLeft += 5;
       count += 3;
       scoreCount();
-      currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 5) {
@@ -270,7 +236,6 @@ var question4 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 5) {
@@ -279,7 +244,6 @@ var question4 = function () {
       }, 1000);
     }
   });
-  console.log('this should be #4: ' + currentQuestion);
 };
 //SECTION Question 5---------------------
 var question5 = function () {
