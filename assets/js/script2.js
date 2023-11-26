@@ -7,6 +7,7 @@ var btnContainer = document.getElementById('btnContainer');
 var correctWrongAlert = document.getElementById('correct-wrong');
 var count = 0;
 var countEl = document.querySelector('#score-count');
+var quizOver = document.querySelector('.quiz-over');
 
 //SECTION create a function to keep track of score
 var scoringInProgress = false; //chatgpt helped create this flag
@@ -29,8 +30,15 @@ var myInterval;
 function setTime() {
   secondsLeft--;
   timeLeft.textContent = secondsLeft + ' seconds left';
-  if (secondsLeft === 0) {
+  if (secondsLeft === 0 || quizOver === true) {
     clearInterval(myInterval);
+    clearCorrectWrongMessage();
+    // startBtn.style.display = 'none';
+    // titleText.textContent = '';
+    // titleQuestion.textContent = '';
+    // //stop timer here
+
+    // titleText.textContent = 'Your score final score is: ' + count;
   }
 }
 
@@ -259,15 +267,16 @@ var question4 = function () {
     }
   });
 };
+
 //SECTION Question 5---------------------
 var question5 = function () {
   clearCorrectWrongMessage();
   titleText.textContent = '5) What does DOM stand for? ';
   btnContainer.innerHTML = `
-    <button class="answer one">Document Object Model</button>
-    <button class="answer two">Data On Modal</button>
-    <button class="answer three">Design Oriented Model</button>
-    <button class="answer four">Design Object Model</button>
+    <button class="answer one quiz-over">Document Object Model</button>
+    <button class="answer two quiz-over">Data On Modal</button>
+    <button class="answer three quiz-over">Design Oriented Model</button>
+    <button class="answer four quiz-over">Design Object Model</button>
    `;
 
   correctAnswerBtn = btnContainer.querySelector('.one');
@@ -279,6 +288,10 @@ var question5 = function () {
       secondsLeft += 5;
       //   count += 3;
       scoreCount(); //updates score count
+
+      setTimeout(function () {
+        endQuiz();
+      }, 1000);
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
@@ -288,4 +301,14 @@ var question5 = function () {
       }, 1000);
     }
   });
+};
+
+var endQuiz = function () {
+  //   clearCorrectWrongMessage();
+  btnContainer.innerHTML = '';
+  titleText.textContent = '';
+  titleQuestion.textContent = '';
+  //stop timer here
+
+  titleText.textContent = 'Your score final score is: ' + count;
 };
