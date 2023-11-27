@@ -30,9 +30,10 @@ var myInterval;
 function setTime() {
   secondsLeft--;
   timeLeft.textContent = secondsLeft + ' seconds left';
-  if (secondsLeft === 0 || quizOver === true) {
+  if (secondsLeft <= 0) {
     clearInterval(myInterval);
     clearCorrectWrongMessage();
+    endQuiz();
   }
 }
 
@@ -59,19 +60,6 @@ function startQuiz() {
   } else if (currentQuestion === 5) {
     question5();
   }
-  //   switch (currentQuestion) {
-  //     case 1:
-  //       question1();
-  //       break;
-  //     case 2:
-  //       question2();
-  //       break;
-  //     case 3:
-  //       question3();
-  //       break;
-  //     default:
-  //       console.log('no matching cases found');
-  //   }
 }
 //SECTION add event listener to start quiz-------------------
 startBtn.addEventListener('click', function (event) {
@@ -88,7 +76,6 @@ var question1 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
 
-  //   console.log('this is question1 and should say 2 ' + currentQuestion);
   titleText.textContent =
     '1) Which tag do you use in your HTML link your JavaScript? ';
   btnContainer.innerHTML = `
@@ -106,11 +93,8 @@ var question1 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
-      scoreCount(); // updates score count
-      // xpert ai helped with this
-
-      //   currentQuestion++;
+      setTime();
+      scoreCount();
 
       setTimeout(function () {
         if (currentQuestion === 2) {
@@ -120,13 +104,16 @@ var question1 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      //   currentQuestion++;
+      setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         if (currentQuestion === 2) {
           question2();
         }
-      }, 1000); // Add a short delay before adding the next question's event listener
+      }, 1000);
     }
   });
 };
@@ -152,6 +139,7 @@ var question2 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
+      setTime();
       //   count += 3;
       scoreCount(); //updates score count
 
@@ -165,6 +153,11 @@ var question2 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
+
       //   currentQuestion++;
 
       setTimeout(function () {
@@ -198,7 +191,7 @@ var question3 = function () {
       secondsLeft += 5;
       //   count += 3;
       scoreCount(); //updates score count
-      //   currentQuestion++;
+      setTime();
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -208,6 +201,10 @@ var question3 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
       //   currentQuestion++;
 
       setTimeout(function () {
@@ -239,6 +236,7 @@ var question4 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
+      setTime();
       //   count += 3;
       scoreCount();
 
@@ -250,6 +248,10 @@ var question4 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         if (currentQuestion === 5) {
@@ -278,7 +280,8 @@ var question5 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
+      setTime();
+
       scoreCount(); //updates score count
 
       setTimeout(function () {
@@ -287,6 +290,10 @@ var question5 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         endQuiz();
@@ -297,11 +304,12 @@ var question5 = function () {
 var formEl = (document.getElementById('form').style.display = 'none');
 var endQuiz = function () {
   //   clearCorrectWrongMessage();
+  formEl = document.getElementById('form').style.display = 'block';
   btnContainer.innerHTML = '';
   titleText.textContent = '';
   titleQuestion.textContent = '';
+  timeLeft.textContent = '';
   //stop timer here
 
-  titleText.textContent = 'Your score final score is: ' + count;
-  formEl = document.getElementById('form').style.display = 'block';
+  titleText.textContent = 'Your final score is: ' + count;
 };

@@ -79,9 +79,10 @@ button:hover {
 /* SECTION final score container  */
 .p {
 }
+
 form {
   display: flex;
-  align-items: center;
+  align-self: center;
 }
 input {
   width: 100px;

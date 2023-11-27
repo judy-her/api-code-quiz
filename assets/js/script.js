@@ -30,9 +30,10 @@ var myInterval;
 function setTime() {
   secondsLeft--;
   timeLeft.textContent = secondsLeft + ' seconds left';
-  if (secondsLeft === 0 || quizOver === true) {
+  if (secondsLeft <= 0) {
     clearInterval(myInterval);
     clearCorrectWrongMessage();
+    endQuiz();
   }
 }
 
@@ -59,19 +60,6 @@ function startQuiz() {
   } else if (currentQuestion === 5) {
     question5();
   }
-  //   switch (currentQuestion) {
-  //     case 1:
-  //       question1();
-  //       break;
-  //     case 2:
-  //       question2();
-  //       break;
-  //     case 3:
-  //       question3();
-  //       break;
-  //     default:
-  //       console.log('no matching cases found');
-  //   }
 }
 
 //SECTION add event listener to start quiz-------------------
@@ -108,11 +96,8 @@ var question1 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
+      setTime();
       scoreCount(); // updates score count
-      // xpert ai helped with this
-
-      //   currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 2) {
@@ -122,6 +107,7 @@ var question1 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
       //   currentQuestion++;
 
       setTimeout(function () {
@@ -155,10 +141,9 @@ var question2 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
+      setTime();
       //   count += 3;
       scoreCount(); //updates score count
-
-      //   currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 3) {
@@ -168,7 +153,7 @@ var question2 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      //   currentQuestion++;
+      setTime();
 
       setTimeout(function () {
         if (currentQuestion === 3) {
@@ -200,9 +185,8 @@ var question3 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
+      setTime();
       scoreCount(); //updates score count
-      //   currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -212,7 +196,7 @@ var question3 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
-      //   currentQuestion++;
+      setTime();
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -243,7 +227,7 @@ var question4 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
+      setTime();
       scoreCount();
 
       setTimeout(function () {
@@ -254,6 +238,7 @@ var question4 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
 
       setTimeout(function () {
         if (currentQuestion === 5) {
@@ -281,7 +266,7 @@ var question5 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
+      setTime();
       scoreCount(); //updates score count
 
       setTimeout(function () {
@@ -290,6 +275,10 @@ var question5 = function () {
     } else {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
+      setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         endQuiz();
@@ -306,7 +295,7 @@ var endQuiz = function () {
   titleQuestion.textContent = '';
   //stop timer here
 
-  titleText.textContent = 'Your score final score is: ' + count;
+  titleText.textContent = 'Your final score is: ' + count;
   formEl = document.getElementById('form').style.display = 'block';
 };
 // function endQuiz() {
