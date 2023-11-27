@@ -301,6 +301,7 @@ var question5 = function () {
     }
   });
 };
+var highScoreBox = document.querySelector('#high-scores');
 var formEl = (document.getElementById('form').style.display = 'none');
 var endQuiz = function () {
   //   clearCorrectWrongMessage();
@@ -312,4 +313,21 @@ var endQuiz = function () {
   //stop timer here
 
   titleText.textContent = 'Your final score is: ' + count;
+  var submitBtn = document.querySelector('#submit-btn');
+
+  submitBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    var userInitials = document.querySelector('#user-initials');
+    //create user object from submission
+    var lastUser = {
+      userName: userInitials.value.trim(),
+      userScore: count,
+    };
+    localStorage.setItem('user', JSON.stringify(lastUser));
+    //   document.querySelector('.viewHighScores').textContent = localStorage.getItem(
+    //     'userName'
+    //   );
+    document.querySelector('#high-scores').textContent =
+      'Name' + lastUser.userName + 'score ' + lastUser.userScore;
+  });
 };

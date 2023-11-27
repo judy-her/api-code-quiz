@@ -108,6 +108,9 @@ var question1 = function () {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
       setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
       //   currentQuestion++;
 
       setTimeout(function () {
@@ -154,6 +157,9 @@ var question2 = function () {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
       setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         if (currentQuestion === 3) {
@@ -197,6 +203,9 @@ var question3 = function () {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
       setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -239,6 +248,9 @@ var question4 = function () {
       correctWrongAlert.textContent = 'Wrong!';
       secondsLeft -= 5;
       setTime();
+      if (secondsLeft <= 0) {
+        return;
+      }
 
       setTimeout(function () {
         if (currentQuestion === 5) {
@@ -290,13 +302,31 @@ var question5 = function () {
 var formEl = (document.getElementById('form').style.display = 'none');
 var endQuiz = function () {
   //   clearCorrectWrongMessage();
+  formEl = document.getElementById('form').style.display = 'block';
   btnContainer.innerHTML = '';
   titleText.textContent = '';
   titleQuestion.textContent = '';
+  timeLeft.textContent = '';
   //stop timer here
 
   titleText.textContent = 'Your final score is: ' + count;
-  formEl = document.getElementById('form').style.display = 'block';
+  var submitBtn = document.querySelector('#submit-btn');
+
+  submitBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    var userInitials = document.querySelector('#user-initials');
+    //create user object from submission
+    var lastUser = {
+      userName: userInitials.value.trim(),
+      userScore: count,
+    };
+    localStorage.setItem('user', JSON.stringify(lastUser));
+    //   document.querySelector('.viewHighScores').textContent = localStorage.getItem(
+    //     'userName'
+    //   );
+    document.querySelector('#high-scores').textContent =
+      'Name' + lastUser.userName + 'score ' + lastUser.userScore;
+  });
 };
 // function endQuiz() {
 //   clearCorrectWrongMessage();

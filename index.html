@@ -15,7 +15,13 @@
   <!-- main------ -->
   <body>
     <div class="main">
-      <h2 class="viewHighScores"><a href="">View High scores</a></h2>
+      <div>
+        <h2 class="viewHighScores">Current High Schore</h2>
+        <ul id="high-scores">
+          <li>Current Highscore:</li>
+        </ul>
+      </div>
+
       <h2 class="score">Current Score: <span id="score-count">0</span></h2>
       <h2 class="time">Time: <span id="time-left">0</span></h2>
     </div>
@@ -30,11 +36,11 @@
 
       <form id="form" class="" action="">
         <label class="p" for="initials">Initials :</label>
-        <input type="text" />
+        <input type="text" id="user-initials" />
         <button id="submit-btn">Submit</button>
       </form>
     </div>
-    <!-- <script src="./assets/js/script.js"></script> -->
-    <script src="./assets/js/script2.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <!-- <script src="./assets/js/script2.js"></script> -->
   </body>
 </html>
