@@ -33,12 +33,6 @@ function setTime() {
   if (secondsLeft === 0 || quizOver === true) {
     clearInterval(myInterval);
     clearCorrectWrongMessage();
-    // startBtn.style.display = 'none';
-    // titleText.textContent = '';
-    // titleQuestion.textContent = '';
-    // //stop timer here
-
-    // titleText.textContent = 'Your score final score is: ' + count;
   }
 }
 
@@ -89,8 +83,6 @@ function clearCorrectWrongMessage() {
   correctWrongAlert.textContent = '';
 }
 //SECTION function for question 1------------------
-//NOTE Xpert learning ai helped with current question variable to keep track of current question
-// var correctAnswerBtn;
 
 var question1 = function () {
   clearCorrectWrongMessage();
@@ -302,7 +294,7 @@ var question5 = function () {
     }
   });
 };
-
+var formEl = (document.getElementById('form').style.display = 'none');
 var endQuiz = function () {
   //   clearCorrectWrongMessage();
   btnContainer.innerHTML = '';
@@ -311,4 +303,5 @@ var endQuiz = function () {
   //stop timer here
 
   titleText.textContent = 'Your score final score is: ' + count;
+  formEl = document.getElementById('form').style.display = 'block';
 };

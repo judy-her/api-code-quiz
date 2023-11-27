@@ -10,7 +10,8 @@ body {
   background-image: linear-gradient(to right, purple, pink);
 }
 h1,
-p {
+p,
+.p {
   text-align: center;
 }
 h1 {
@@ -19,7 +20,8 @@ h1 {
   padding-bottom: 10px;
 }
 
-p {
+p,
+.p {
   font-size: 30px;
   font-family: var(--question-font);
   font-weight: bold;
@@ -73,4 +75,16 @@ button:hover {
 .json-btn {
   height: 55px;
   width: 110px;
+}
+/* SECTION final score container  */
+.p {
+}
+form {
+  display: flex;
+  align-items: center;
+}
+input {
+  width: 100px;
+  height: 40px;
+  margin: 0;
 }
