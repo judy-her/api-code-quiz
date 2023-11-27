@@ -315,8 +315,15 @@ function saveHighScore() {
 }
 
 function updateDisplay() {
-  document.querySelector('#name').textContent = currentUserName;
-  document.querySelector('#score').textContent = currentHighScore;
+  var storedHighScores = localStorage.getItem('highScores');
+  if (storedHighScores) {
+    highScores = JSON.parse(storedHighScores);
+    var lastUser = highScores[highScores.length - 1];
+    if (lastUser) {
+      document.querySelector('#name').textContent = lastUser.userName;
+      document.querySelector('#score').textContent = lastUser.highScore;
+    }
+  }
 }
 var endQuiz = function () {
   formEl = document.getElementById('form').style.display = 'block';
@@ -358,4 +365,6 @@ function renderHighScore() {
   document.querySelector('#score').textContent = lastUser.highScore;
 }
 // Initial update of the display
-updateDisplay();
+window.addEventListener('load', function () {
+  updateDisplay();
+});
