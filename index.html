@@ -16,15 +16,17 @@
   <body>
     <div class="main">
       <div>
-        <h2 class="viewHighScores">Current High Score</h2>
+        <h2 class="viewHighScores special-color">Current High Score</h2>
+        <!-- user name and highscore -->
         <ul id="high-scores">
-          <!-- <li>Current Highscore:</li> -->
           <li>User Name: <span id="name"></span></li>
           <li>High Score: <span id="score"></span></li>
         </ul>
       </div>
-
-      <h2 class="score">Current Score: <span id="score-count">0</span></h2>
+      <!--Current Score and time  -->
+      <h2 class="score special-color">
+        Current Score: <span id="score-count">0</span>
+      </h2>
       <h2 class="time">Time: <span id="time-left">0</span></h2>
     </div>
     <div class="card">
@@ -35,7 +37,7 @@
       <button class="startbtn">Start Quiz</button>
       <div id="btnContainer"></div>
       <h2 id="correct-wrong"></h2>
-
+      <!-- form for initials and final score -->
       <form id="form" class="" action="">
         <label class="p" for="initials">Initials :</label>
         <input type="text" id="user-initials" />
@@ -43,7 +45,7 @@
         <button class="startbtn">Start Again</button>
       </form>
     </div>
-    <!-- <script src="./assets/js/script.js"></script> -->
-    <script src="./assets/js/script2.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <!-- <script src="./assets/js/script2.js"></script> -->
   </body>
 </html>

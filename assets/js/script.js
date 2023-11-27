@@ -1,4 +1,4 @@
-console.log('i am script 1:)');
+console.log('i am script 2 yeah:)');
 var timeLeft = document.querySelector('#time-left');
 var startBtn = document.querySelector('.startbtn');
 var titleText = document.querySelector('.title');
@@ -61,7 +61,6 @@ function startQuiz() {
     question5();
   }
 }
-
 //SECTION add event listener to start quiz-------------------
 startBtn.addEventListener('click', function (event) {
   event.preventDefault();
@@ -71,14 +70,12 @@ startBtn.addEventListener('click', function (event) {
 function clearCorrectWrongMessage() {
   correctWrongAlert.textContent = '';
 }
-
 //SECTION function for question 1------------------
 
 var question1 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
 
-  //   console.log('this is question1 and should say 2 ' + currentQuestion);
   titleText.textContent =
     '1) Which tag do you use in your HTML link your JavaScript? ';
   btnContainer.innerHTML = `
@@ -97,7 +94,7 @@ var question1 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       setTime();
-      scoreCount(); // updates score count
+      scoreCount();
 
       setTimeout(function () {
         if (currentQuestion === 2) {
@@ -111,17 +108,15 @@ var question1 = function () {
       if (secondsLeft <= 0) {
         return;
       }
-      //   currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 2) {
           question2();
         }
-      }, 1000); // Add a short delay before adding the next question's event listener
+      }, 1000);
     }
   });
 };
-
 //SECTION Question 2---------------------
 var question2 = function () {
   clearCorrectWrongMessage();
@@ -148,6 +143,8 @@ var question2 = function () {
       //   count += 3;
       scoreCount(); //updates score count
 
+      //   currentQuestion++;
+
       setTimeout(function () {
         if (currentQuestion === 3) {
           question3();
@@ -161,6 +158,8 @@ var question2 = function () {
         return;
       }
 
+      //   currentQuestion++;
+
       setTimeout(function () {
         if (currentQuestion === 3) {
           question3();
@@ -169,7 +168,6 @@ var question2 = function () {
     }
   });
 };
-
 //SECTION Question 3---------------------
 var question3 = function () {
   clearCorrectWrongMessage();
@@ -191,8 +189,9 @@ var question3 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      setTime();
+      //   count += 3;
       scoreCount(); //updates score count
+      setTime();
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -206,6 +205,7 @@ var question3 = function () {
       if (secondsLeft <= 0) {
         return;
       }
+      //   currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -237,6 +237,7 @@ var question4 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       setTime();
+      //   count += 3;
       scoreCount();
 
       setTimeout(function () {
@@ -260,6 +261,7 @@ var question4 = function () {
     }
   });
 };
+
 //SECTION Question 5---------------------
 var question5 = function () {
   clearCorrectWrongMessage();
@@ -279,6 +281,7 @@ var question5 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       setTime();
+
       scoreCount(); //updates score count
 
       setTimeout(function () {
@@ -300,8 +303,29 @@ var question5 = function () {
 };
 
 var formEl = (document.getElementById('form').style.display = 'none');
+var highScores = [];
+var currentUserName = '';
+var currentHighScore = 0;
+
+function saveHighScore() {
+  var storedHighScores = localStorage.getItem('highScores');
+  if (storedHighScores) {
+    highScores = JSON.parse(storedHighScores);
+  }
+}
+
+function updateDisplay() {
+  var storedHighScores = localStorage.getItem('highScores');
+  if (storedHighScores) {
+    highScores = JSON.parse(storedHighScores);
+    var lastUser = highScores[highScores.length - 1];
+    if (lastUser) {
+      document.querySelector('#name').textContent = lastUser.userName;
+      document.querySelector('#score').textContent = lastUser.highScore;
+    }
+  }
+}
 var endQuiz = function () {
-  //   clearCorrectWrongMessage();
   formEl = document.getElementById('form').style.display = 'block';
   btnContainer.innerHTML = '';
   titleText.textContent = '';
@@ -310,27 +334,50 @@ var endQuiz = function () {
   //stop timer here
 
   titleText.textContent = 'Your final score is: ' + count;
-  var submitBtn = document.querySelector('#submit-btn');
-
-  submitBtn.addEventListener('click', function (event) {
-    event.preventDefault();
-    var userInitials = document.querySelector('#user-initials');
-    //create user object from submission
-    var lastUser = {
-      userName: userInitials.value.trim(),
-      userScore: count,
-    };
-    localStorage.setItem('user', JSON.stringify(lastUser));
-    //   document.querySelector('.viewHighScores').textContent = localStorage.getItem(
-    //     'userName'
-    //   );
-    document.querySelector('#high-scores').textContent =
-      'Name' + lastUser.userName + 'score ' + lastUser.userScore;
-  });
+  saveHighScore();
+  renderHighScore();
 };
-// function endQuiz() {
-//   clearCorrectWrongMessage();
-//   //display final score and add initials
-//   //1)
-//   titleText.textContent = 'Quiz Complete!';
-// }
+
+var submitBtn = document.querySelector('#submit-btn');
+
+submitBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  var userInitials = document.querySelector('#user-initials');
+  currentUserName = userInitials.value;
+  currentHighScore = count;
+  //UCB Xpert AI helped here
+  // Find if there's an existing user with the same name
+  var existingUserIndex = highScores.findIndex(
+    (user) => user.userName === currentUserName
+  );
+
+  // If the user exists and the new score is higher, update the score
+  if (
+    existingUserIndex !== -1 &&
+    currentHighScore > highScores[existingUserIndex].highScore
+  ) {
+    highScores[existingUserIndex].highScore = currentHighScore;
+  } else {
+    // Otherwise, add a new entry
+    highScores.push({ userName: currentUserName, highScore: currentHighScore });
+  }
+
+  //   highScores.push({ userName: currentUserName, highScore: currentHighScore });
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+  renderHighScore();
+  updateDisplay();
+});
+
+function renderHighScore() {
+  var lastUser = highScores[highScores.length - 1];
+  if (!lastUser) {
+    return;
+  }
+  document.querySelector('#name').textContent = lastUser.userName;
+  document.querySelector('#score').textContent = lastUser.highScore;
+}
+// Initial update of the display
+window.addEventListener('load', function () {
+  updateDisplay();
+});
