@@ -346,14 +346,27 @@ submitBtn.addEventListener('click', function (event) {
   var userInitials = document.querySelector('#user-initials');
   currentUserName = userInitials.value;
   currentHighScore = count;
+  //UCB Xpert AI helped here
+  // Find if there's an existing user with the same name
+  var existingUserIndex = highScores.findIndex(
+    (user) => user.userName === currentUserName
+  );
 
-  highScores.push({ userName: currentUserName, highScore: currentHighScore });
+  // If the user exists and the new score is higher, update the score
+  if (
+    existingUserIndex !== -1 &&
+    currentHighScore > highScores[existingUserIndex].highScore
+  ) {
+    highScores[existingUserIndex].highScore = currentHighScore;
+  } else {
+    // Otherwise, add a new entry
+    highScores.push({ userName: currentUserName, highScore: currentHighScore });
+  }
+
+  //   highScores.push({ userName: currentUserName, highScore: currentHighScore });
   localStorage.setItem('highScores', JSON.stringify(highScores));
   renderHighScore();
   updateDisplay();
-  //   localStorage.setItem('user', userName);
-  //   localStorage.setItem('score', highScore);
-  //   renderHighScore();
 });
 
 function renderHighScore() {
