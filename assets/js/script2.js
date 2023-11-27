@@ -301,7 +301,7 @@ var question5 = function () {
     }
   });
 };
-var highScoreBox = document.querySelector('#high-scores');
+
 var formEl = (document.getElementById('form').style.display = 'none');
 var endQuiz = function () {
   //   clearCorrectWrongMessage();
@@ -320,14 +320,19 @@ var endQuiz = function () {
     var userInitials = document.querySelector('#user-initials');
     //create user object from submission
     var lastUser = {
-      userName: userInitials.value.trim(),
+      userName: userInitials.value,
       userScore: count,
     };
     localStorage.setItem('user', JSON.stringify(lastUser));
     //   document.querySelector('.viewHighScores').textContent = localStorage.getItem(
     //     'userName'
     //   );
-    document.querySelector('#high-scores').textContent =
-      'Name' + lastUser.userName + 'score ' + lastUser.userScore;
+
+    document.querySelector('#name').textContent = lastUser.userName;
+
+    document.querySelector('#score').textContent = lastUser.userScore;
+
+    // var savedItems = localStorage.getItem('userName');
+    // console.log(savedItems);
   });
 };
