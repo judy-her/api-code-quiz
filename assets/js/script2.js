@@ -303,8 +303,22 @@ var question5 = function () {
 };
 
 var formEl = (document.getElementById('form').style.display = 'none');
+var highScores = [];
+var currentUserName = '';
+var currentHighScore = 0;
+
+function saveHighScore() {
+  var storedHighScores = localStorage.getItem('highScores');
+  if (storedHighScores) {
+    highScores = JSON.parse(storedHighScores);
+  }
+}
+
+function updateDisplay() {
+  document.querySelector('#name').textContent = currentUserName;
+  document.querySelector('#score').textContent = currentHighScore;
+}
 var endQuiz = function () {
-  //   clearCorrectWrongMessage();
   formEl = document.getElementById('form').style.display = 'block';
   btnContainer.innerHTML = '';
   titleText.textContent = '';
@@ -313,26 +327,35 @@ var endQuiz = function () {
   //stop timer here
 
   titleText.textContent = 'Your final score is: ' + count;
-  var submitBtn = document.querySelector('#submit-btn');
-
-  submitBtn.addEventListener('click', function (event) {
-    event.preventDefault();
-    var userInitials = document.querySelector('#user-initials');
-    //create user object from submission
-    var lastUser = {
-      userName: userInitials.value,
-      userScore: count,
-    };
-    localStorage.setItem('user', JSON.stringify(lastUser));
-    //   document.querySelector('.viewHighScores').textContent = localStorage.getItem(
-    //     'userName'
-    //   );
-
-    document.querySelector('#name').textContent = lastUser.userName;
-
-    document.querySelector('#score').textContent = lastUser.userScore;
-
-    // var savedItems = localStorage.getItem('userName');
-    // console.log(savedItems);
-  });
+  saveHighScore();
+  renderHighScore();
 };
+
+var submitBtn = document.querySelector('#submit-btn');
+
+submitBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  var userInitials = document.querySelector('#user-initials');
+  currentUserName = userInitials.value;
+  currentHighScore = count;
+
+  highScores.push({ userName: currentUserName, highScore: currentHighScore });
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+  renderHighScore();
+  updateDisplay();
+  //   localStorage.setItem('user', userName);
+  //   localStorage.setItem('score', highScore);
+  //   renderHighScore();
+});
+
+function renderHighScore() {
+  var lastUser = highScores[highScores.length - 1];
+  if (!lastUser) {
+    return;
+  }
+  document.querySelector('#name').textContent = lastUser.userName;
+  document.querySelector('#score').textContent = lastUser.highScore;
+}
+// Initial update of the display
+updateDisplay();
