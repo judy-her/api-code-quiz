@@ -1,4 +1,4 @@
-console.log('i am script 2 yeah:)');
+console.log('i am script 1 now:)');
 var timeLeft = document.querySelector('#time-left');
 var startBtn = document.querySelector('.startbtn');
 var titleText = document.querySelector('.title');
@@ -336,7 +336,7 @@ submitBtn.addEventListener('click', function (event) {
   currentUserName = userInitials.value;
   currentHighScore = count;
   //UCB Xpert AI helped here
-  // Find if there's an existing user with the same name
+  // Find if there's an existing user with the same
   var existingUserIndex = highScores.findIndex(
     (user) => user.userName === currentUserName
   );
