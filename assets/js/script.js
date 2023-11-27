@@ -20,7 +20,7 @@ function scoreCount() {
 
   setTimeout(function () {
     scoringInProgress = false; // Reset the flag after the timeout
-  }, 1000); // Use the same timeout duration as in your code
+  }, 1000);
 }
 
 //SECTION setInterval-------------------------------------
@@ -121,7 +121,6 @@ var question1 = function () {
 var question2 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  //   console.log('this is question2 and should say 3 ' + currentQuestion);
 
   titleText.textContent = '2) I can declare a variable using: ';
   btnContainer.innerHTML = `
@@ -140,10 +139,7 @@ var question2 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       setTime();
-      //   count += 3;
-      scoreCount(); //updates score count
-
-      //   currentQuestion++;
+      scoreCount();
 
       setTimeout(function () {
         if (currentQuestion === 3) {
@@ -158,8 +154,6 @@ var question2 = function () {
         return;
       }
 
-      //   currentQuestion++;
-
       setTimeout(function () {
         if (currentQuestion === 3) {
           question3();
@@ -172,7 +166,7 @@ var question2 = function () {
 var question3 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  //   console.log('this is question3 and should say 4 ' + currentQuestion);
+
   titleText.textContent = '3) Strict equality checks for: ';
   btnContainer.innerHTML = `
   <button class="answer one">Value</button>
@@ -189,8 +183,7 @@ var question3 = function () {
     if (clickedBtn === correctAnswerBtn) {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
-      //   count += 3;
-      scoreCount(); //updates score count
+      scoreCount();
       setTime();
 
       setTimeout(function () {
@@ -205,7 +198,6 @@ var question3 = function () {
       if (secondsLeft <= 0) {
         return;
       }
-      //   currentQuestion++;
 
       setTimeout(function () {
         if (currentQuestion === 4) {
@@ -220,7 +212,7 @@ var question3 = function () {
 var question4 = function () {
   clearCorrectWrongMessage();
   currentQuestion++;
-  //   console.log('this is question4 and should say 5 ' + currentQuestion);
+
   titleText.textContent = '4) What does the JSON.stringify() method do? ';
   btnContainer.innerHTML = `
     <button class="answer one json-btn">Parse JSON string</button>
@@ -237,7 +229,6 @@ var question4 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       setTime();
-      //   count += 3;
       scoreCount();
 
       setTimeout(function () {
@@ -281,8 +272,7 @@ var question5 = function () {
       correctWrongAlert.textContent = 'Correct!';
       secondsLeft += 5;
       setTime();
-
-      scoreCount(); //updates score count
+      scoreCount();
 
       setTimeout(function () {
         endQuiz();
@@ -331,7 +321,6 @@ var endQuiz = function () {
   titleText.textContent = '';
   titleQuestion.textContent = '';
   timeLeft.textContent = '';
-  //stop timer here
 
   titleText.textContent = 'Your final score is: ' + count;
   saveHighScore();
@@ -363,7 +352,6 @@ submitBtn.addEventListener('click', function (event) {
     highScores.push({ userName: currentUserName, highScore: currentHighScore });
   }
 
-  //   highScores.push({ userName: currentUserName, highScore: currentHighScore });
   localStorage.setItem('highScores', JSON.stringify(highScores));
   renderHighScore();
   updateDisplay();
@@ -377,7 +365,7 @@ function renderHighScore() {
   document.querySelector('#name').textContent = lastUser.userName;
   document.querySelector('#score').textContent = lastUser.highScore;
 }
-// Initial update of the display
+
 window.addEventListener('load', function () {
   updateDisplay();
 });
